@@ -1,0 +1,19 @@
+#!/bin/bash
+read -p "enter folder name: " folder;
+FILES=/Users/andrewakhlaghi/Desktop/test_dir/$folder/*
+
+for f in $FILES;
+do
+  tiff=${f%.*}.tiff
+  convert -density 300 $f -depth 8 -strip -background white -alpha off $tiff
+  ocr=${f%.*}_ocr
+  tlate=${f%.*}_trans
+  tesseract $tiff $ocr -l rus
+  trans -e yandex :eng file://$ocr.txt > $tlate.txt
+  sleep 60
+done
+
+mkdir $folder"_ocr"
+mkdir $folder"_translation"
+mv *_ocr.txt *_ocr
+mv *_trans.txt *_translation
