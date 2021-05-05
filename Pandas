@@ -1,0 +1,42 @@
+import pandas as pd
+
+df_1=pd.read_csv('1976-2018-house2.csv',encoding='latin1')
+list_years=[2000,2002,2004,2006,2008,2010,2012,2014,2016,2018]
+df_TX=df_1.loc[df_1['state_po']=='TX']
+df_years=df_TX.loc[df_TX['year'].isin(list_years)]
+df_dems_TX=df_years.loc[df_years['party']=='democrat']
+df_dems_TX_25=df_dems_TX.loc[df_dems_TX['district']==25]
+df_dems_TX_25['stage']=df_dems_TX_25['stage'].fillna('gen')
+votes=df_dems_TX_25['candidatevotes']
+votes.pct_change()
+
+df_final=pd.DataFrame({'year':df_dems_TX_25['year'], 'percent_chng_vote_total': df_dems_TX_25['candidatevotes'].pct_change()})
+
+
+repubs_25 = df_years.loc[((df_years['party']=='republican') & (df_years['district']==25))]
+
+df_both=pd.DataFram({'year':df_dems_TX_25['year'], 'D_percent_chng_vote_total': df_dems_TX_25['candidatevotes'].pct_change(), 'R_precent_chng_vote_total': repubs_25['candidatevotes'].pct_change()})
+
+
+df_both=pd.DataFrame({'year':df_dems_TX_25['year'], 'D_percent_chng_vote_total': df_dems_TX_25['candidatevotes'].pct_change(), 'R_precent_chng_vote_total': repubs_25['candidatevotes'].pct_change()})
+
+df_1=pd.DataFrame({'year':df_dems_TX_25['year'],'change':df_dems_TX_25['candidatevotes'].pct_change()})
+df_2=pd.DataFrame({'year':repubs_25['year'], 'R_change':repubs_25['candidatevotes'].pct_change()})
+df_2.join(df_1.set_index('year'), on='year')
+
+#Calculate MOE
+#!/usr/bin/env python3
+import math
+
+### you must input Biden's share of the poll as a decimal, less than one
+D=float(input("Biden number: "))
+sample=float(input("Sample size: "))
+
+sample_standard_deviation=D*(1-D)
+
+r_error=math.sqrt(sample_standard_deviation)
+r_sample=math.sqrt(sample)
+
+MOE=1.96*(r_error/r_sample)
+
+print(MOE)
