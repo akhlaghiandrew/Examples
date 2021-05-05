@@ -1,0 +1,78 @@
+
+#this was a CSV containing all interview data
+path = \"/Users/andrewakhlaghi/Desktop/IOHP/IOHPAuthors.csv
+
+authors_table = []
+import os
+import csv
+os.chdir('/Users/andrewakhlaghi/Desktop/IOHP')
+with open(path) as fi:
+csv_input = csv.reader(fi)
+for row in csv_input:
+pages = int(row[2])
+name = row[0]
+number = int(row[1]) + 1
+jpeg_id = 1
+file_path = '/Users/andrewakhlaghi/Desktop/IOHP/{}'.format(name)
+os.mkdir(file_path)
+for i in range(pages):
+  os.chdir(file_path0
+  numerid = number
+  jpg_url = "https://ids.lib.harvard.edu/ids/iiif/{}/full/,150/0/native.jpg\".format(str(number)
+  jpg_out_filename = file_path+str(numerid)+'.jpg'
+  subprocess.call(['wget', jpg_url, '-O', jpg_out_filename])
+  time.sleep(1+random.random())
+  number+=1
+  jpeg_id+=1"
+  
+  
+# Kraken binarize image
+for i in range(pages):
+  os.chdir(/home/vagrant/Abadian_Bahman)
+  jpg_location = '/home/vagrant/AbbasAttaie_Ramzi/AbbasAttaie_Ramzi{}.jpg'.format(number)
+  bw = "bw{}.jpg\".format(number)
+  subprocess.call(['kraken', '-i', jpg_location, bw, 'binarize'])
+  number+=1"
+
+#Kraken line segment
+for i in range(pages):
+  bw_locations = 'bw{}.jpg.'.format(number)
+  lines_locations = 'lines{}.json'.format(number)
+  subprocess.call(['kraken', '-i', bw_locations, lines_locations, segment])
+  number+=1"
+  
+
+#Kraken
+for i in range(pages):
+  bw_locations = 'bw{}.jpg'.format(number)
+  lines_locations = 'lines{}.json'.format(number)
+  text_locations='AbbasAttaie_Ramzi{}.txt'.format(number)
+  model = 'persian1-55000.clstm
+  subprocess.call(['kraken', '-i', bw_locations, text_locations, 'ocr', '-l', lines_locations, '-m persian1-55000.clstm'])\n",
+  number+=1"
+
+# Remove stopwords
+import csv
+import subprocess
+import os
+path = \"/Users/andrewakhlaghi/Desktop/textsIOHP/raw_text/complete_corpus/IOHPAuthors.csv
+os.chdir('/Users/andrewakhlaghi/Desktop/textsIOHP/raw_text/complete_corpus')
+with open(path) as fi:
+  csv_input = csv.reader(fi)
+  for row in csv_input:
+    name = row[0]
+    clean_list=[]
+    file_path = '/Users/andrewakhlaghi/Desktop/textsIOHP/raw_text/complete_corpus/all_{}.txt'.format(name)
+    new_file_path = '/Users/andrewakhlaghi/Desktop/textsIOHP/raw_text/clean_texts/{}.txt'.format(name)
+    new_file=open(new_file_path,'w')
+    text=open(file_path).read()
+    token_list=word_tokenize(text.lower())
+    text_filtered = [item for item in token_list if (item not in stop_words)&(item not in string.punctuation)]
+    clean_list.append(' '.join(text_filtered))
+    for item in clean_list:
+      new_file.write(item)
+
+#run LDA
+for i, topic_distribution in enumerate(topic_word):
+topic_words = np.array(vocabulary)[np.argsort(topic_distribution)][:-(n_top_words+1):-1]
+print('Topic {}: {}'.format(i, ' '.join(topic_words)))"
