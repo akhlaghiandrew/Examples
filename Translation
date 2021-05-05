@@ -1,4 +1,5 @@
 #!/bin/bash
+# Full article at https://programminghistorian.org/en/lessons/OCR-and-Machine-Translation
 read -p "enter folder name: " folder;
 FILES=/Users/andrewakhlaghi/Desktop/test_dir/$folder/*
 
